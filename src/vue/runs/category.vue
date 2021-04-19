@@ -109,15 +109,18 @@ export default{
     },
     selectedVariables() {
       let categoryVariables = this.category.variables;
+      console.log(categoryVariables);
       let selectedVariables = [];
       categoryVariables.forEach(v => {
           let selected = v.values.find(x => {return x.selected});
-          selectedVariables.push({
-            label: selected.label,
-            rules: selected.rules,
-            selected: selected.selected,
-            value: selected.value
-          });
+          if(selected != null){
+            selectedVariables.push({
+              label: selected.label,
+              rules: selected.rules,
+              selected: selected.selected,
+              value: selected.value
+            });
+          }
         });
       return selectedVariables;
     }

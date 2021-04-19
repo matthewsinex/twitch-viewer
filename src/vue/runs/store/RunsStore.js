@@ -45,13 +45,22 @@ export const store = new Vuex.Store({
 
         //set game variables
         //set selectedValue to default variable
+
+        //gameVariables
+        //.filter(v =>
+        //  v.category || v["is-subcategory"] == true //some variables are game global
+        //)
+
         gameVariables
         .filter(v =>
-          v.category || v["is-subcategory"] == true //some variables are game global
+          v["is-subcategory"] == true
         )
         .forEach(v => {
           let defaultVariableString = v.values.default;
-          v.values.values[defaultVariableString].selected = true;
+
+          if(defaultVariableString != null){
+            v.values.values[defaultVariableString].selected = true;
+          }
         })
 
         //group the runs by category
@@ -68,9 +77,11 @@ export const store = new Vuex.Store({
             }
           })
 
+        console.log(gameVariables);
+
         categories.forEach(c => {
           gameVariables.forEach(v => {
-            if(v.category == c.categoryId || (v.category == null && v["is-subcategory"] == true)){
+            if(v["is-subcategory"] == true && (v.category == c.categoryId || v.category == null)) {
               let variableValues = Object.keys(v.values.values);
 
               let newVariable = {
