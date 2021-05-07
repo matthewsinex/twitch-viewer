@@ -1,0 +1,113 @@
+<!doctype html>
+
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content= "width=device-width, initial-scale=1.0">
+
+  <title>Remove Timestamps</title>
+  <link rel="stylesheet" href="css/bulma.min.css">
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+
+<body>
+  <nav class="navbar is-link" role="navigation" aria-label="main navigation">
+    <div class="container">
+      <div class="navbar-brand">
+        <a class="navbar-item" href="index.html">
+          <img src="img/logo.png"  height="28">
+        </a>
+        <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false">
+          <span aria-hidden="true"></span>
+          <span aria-hidden="true"></span>
+          <span aria-hidden="true"></span>
+        </a>
+      </div>
+
+    <div id="navbarBasicExample" class="navbar-menu">
+      <div class="navbar-start">
+        <a class="navbar-item" href="users.html">
+          Users
+        </a>
+        <a class="navbar-item" href="follows.html">
+          Follows
+        </a>
+        <a class="navbar-item" href="leaderboards.html">
+          Leaderboards
+        </a>
+        <a class="navbar-item" href="runs.html">
+          Speedruns
+        </a>
+        <a class="navbar-item" href="stream.html">
+          StreamInfo
+        </a>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<section class="section">
+  <div class="container">
+<form name="TextFields">
+  <div class="field">
+    <div class="control">
+          <TEXTAREA type="text" cols="67" rows="10" name="Input" value="" class="textarea"></TEXTAREA>
+    </div>
+  </div>
+  <div class="field">
+    <input type="button" value="Do the job!" onClick="TryClear();" class="button is-link"></input>
+  </div>
+  <div class="field">
+  <div class="control">
+        <TEXTAREA type="text" cols="67" rows="10" name="Output" value="" class="textarea"></TEXTAREA>
+  </div>
+  </div>
+</form>
+</section>
+</div>
+
+  <script
+  src="https://code.jquery.com/jquery-3.4.1.min.js"
+  integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+  crossorigin="anonymous"></script>
+  <script src="js/navbar-burger.js"></script>
+
+
+
+  <script>
+    function TryClear(){
+      Length = document.all.TextFields.Input.value.length;
+      FirstSumbol = true;
+      CancelExit =false;
+      var strOut = "";
+
+      for(i=0; i<Length; i++){
+      ch = document.all.TextFields.Input.value.substring(i,i+1);
+      if(FirstSumbol){
+      if(ch >= '0' && ch <= '9' ){
+      CancelExit =true;
+      FirstSumbol = false;
+      }
+      else {
+      CancelExit =false;
+      strOut += '\n';
+      FirstSumbol = false;
+      }
+      }
+      if(ch == '\n'){
+      FirstSumbol = true;
+      }
+
+      if((!CancelExit) && (!FirstSumbol)){
+        strOut += ch;
+        document.all.TextFields.Output.value = i;
+      }
+      else continue;
+      }
+        document.all.TextFields.Output.value = strOut;
+        document.all.TextFields.Output.value = document.all.TextFields.Output.value.replace(/(\r\n|\n|\r)/gm," ");
+        return;
+      }
+  </script>
+</body>
+</html>
