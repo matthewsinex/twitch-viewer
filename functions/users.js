@@ -19,23 +19,23 @@ exports.handler = async (event) => {
   const { httpMethod } = event;
 
   if (httpMethod === 'GET') {
-    const login = event.queryStringParameters.name;
-    const id = event.queryStringParameters.id;
-    const apiUrl = getApiUrl(login, id);
-
-    const response = await fetch(
-      apiUrl,
-      {
-        headers: {
-          'content-type': 'application/json',
-          'Client-ID': TWITCH_CLIENT_ID
-        }
-      }
-    )
-    const userData = await response.text();
+    // const login = event.queryStringParameters.name;
+    // const id = event.queryStringParameters.id;
+    // const apiUrl = getApiUrl(login, id);
+    //
+    // const response = await fetch(
+    //   apiUrl,
+    //   {
+    //     headers: {
+    //       'content-type': 'application/json',
+    //       'Client-ID': TWITCH_CLIENT_ID
+    //     }
+    //   }
+    // )
+    // const userData = await response.text();
     return {
       statusCode: 200,
-      body: userData,
+      body: 'test',//userData,
       headers: {
         'Access-Control-Allow-Origin': '*',
         "Access-Control-Allow-Headers": "Content-Type",
