@@ -35,7 +35,7 @@ exports.handler = async (event) => {
     // const userData = await response.text();
     return {
       statusCode: 200,
-      body: 'test',//userData,
+      body: '{test: "asdf"}',//userData,
       headers: {
         'Access-Control-Allow-Origin': '*',
         "Access-Control-Allow-Headers": "Content-Type",
