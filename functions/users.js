@@ -33,7 +33,7 @@ exports.handler = async (event) => {
     //   }
     // )
     // const userData = await response.text();
-    var userData = { test: "asdf" };
+    var userData = JSON.stringify({ test: "asdf" });
     return {
       statusCode: 200,
       body: userData,
