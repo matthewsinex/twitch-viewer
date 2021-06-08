@@ -1895,23 +1895,16 @@ exports.handler = async event => {
   } = event;
 
   if (httpMethod === 'GET') {
-    // const login = event.queryStringParameters.name;
-    // const id = event.queryStringParameters.id;
-    // const apiUrl = getApiUrl(login, id);
-    //
-    // const response = await fetch(
-    //   apiUrl,
-    //   {
-    //     headers: {
-    //       'content-type': 'application/json',
-    //       'Client-ID': TWITCH_CLIENT_ID
-    //     }
-    //   }
-    // )
-    // const userData = await response.text();
-    const userData = JSON.stringify({
-      message: "Hello Wosrld"
+    const login = event.queryStringParameters.name;
+    const id = event.queryStringParameters.id;
+    const apiUrl = getApiUrl(login, id);
+    const response = await Object(node_fetch__WEBPACK_IMPORTED_MODULE_0__["default"])(apiUrl, {
+      headers: {
+        'content-type': 'application/json',
+        'Client-ID': TWITCH_CLIENT_ID
+      }
     });
+    const userData = await response.text();
     return {
       statusCode: 200,
       body: userData,

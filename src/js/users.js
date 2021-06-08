@@ -23,6 +23,7 @@ var users = (function () {
 
   function fetchUserData(login) {
     var url = `${API_BASE_URL}/users?name=${login}`;
+
     $.ajax({
       url: url
     })
