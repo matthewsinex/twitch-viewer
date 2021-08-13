@@ -54,7 +54,12 @@ export default {
     })
   },
   getRuns(url, runs, resolve, reject){
-    $.ajax({url: url})
+    $.ajax({
+      url: url,
+      headers: {
+        'Access-Control-Allow-Origin': '*'
+      }
+    })
     .then(response => {
       const retrievedRuns = runs.concat(response.data);
       var nextPageUrl = response.pagination.links.find(x => x.rel == "next");
