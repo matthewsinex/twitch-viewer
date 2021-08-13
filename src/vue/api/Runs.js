@@ -56,9 +56,7 @@ export default {
   getRuns(url, runs, resolve, reject){
     $.ajax({
       url: url,
-      headers: {
-        'Access-Control-Allow-Origin': '*'
-      }
+      dataType: 'jsonp'
     })
     .then(response => {
       const retrievedRuns = runs.concat(response.data);
