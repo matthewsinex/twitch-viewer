@@ -30,12 +30,16 @@
     >
     </WorldRecordChart>
     </div>
+    <footer class="card-footer">
+      <a href="#" class="card-footer-item" v-on:click.prevent="generateBatchDownload">Download</a>
+    </footer>
   </div>
   </div>
 </template>
 <script>
 import WorldRecordRunRow from './world-record-run-row.vue'
 import WorldRecordChart from './world-record-chart.vue'
+import Utils from './store/utils.js'
 
 export default {
   props: {
@@ -69,6 +73,11 @@ export default {
   components: {
     WorldRecordRunRow,
     WorldRecordChart
+  },
+  methods: {
+    generateBatchDownload() {
+      Utils.generateBatchDownload(this.worldRecordRuns);
+    }
   }
 }
 </script>

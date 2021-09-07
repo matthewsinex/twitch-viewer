@@ -36,5 +36,47 @@ export default {
 
       return dateA - dateB;
     });
+  },
+  generateBatchDownload(runs) {
+    var self = this;
+    var batchFileCommands = runs
+      .map(function(x){
+        //run time
+        var runTimeFormatted = self.fancyTimeFormat(x.times.realtime_t);
+        runTimeFormatted = runTimeFormatted.replaceAll(':', '_');
+
+        //runner name
+        var playerName = "";
+        if(x.players.data[0].names){
+          playerName = x.players.data[0].names.international;
+        }
+        else {
+          playerName = x.players.data[0].name;
+        }
+
+        //
+        var date = x.date.replaceAll('-', '.');
+        var videoLink = x.videos.links[0].uri;
+        var fileName = `${date} ${playerName} ${runTimeFormatted}.mp4`;
+
+        var command = `youtube-dl -o '${fileName}' ${videoLink}`;
+
+        return command;
+      });
+
+      this.copyToClipboard(
+        batchFileCommands
+        .join('\r\n')
+      );
+
+      alert('youtube-dl commands copied to clipboard. Paste into a batch file and run to download videos.');
+  },
+  copyToClipboard(str) {
+    var el = document.createElement('textarea');
+    el.value = str;
+    document.body.appendChild(el);
+    el.select();
+    document.execCommand('copy');
+    document.body.removeChild(el);
   }
 }

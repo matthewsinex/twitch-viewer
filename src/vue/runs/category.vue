@@ -35,6 +35,9 @@
             </tbody>
           </table>
         </div>
+        <footer class="card-footer">
+          <a href="#" class="card-footer-item" v-on:click.prevent="generateBatchDownload">Download</a>
+        </footer>
       </div>
       </div>
       <MostActiveRunners
@@ -60,6 +63,7 @@ import RunRow from './run-row.vue'
 import VariableChooser from './variable-chooser.vue'
 import WorldRecords from './world-records.vue'
 import MostActiveRunners from './most-active-runners.vue'
+import Utils from './store/utils.js'
 
 export default{
   props: {
@@ -123,6 +127,11 @@ export default{
           }
         });
       return selectedVariables;
+    }
+  },
+  methods: {
+    generateBatchDownload() {
+      Utils.generateBatchDownload(this.runs);
     }
   }
 }
