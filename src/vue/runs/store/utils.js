@@ -59,7 +59,7 @@ export default {
         var videoLink = x.videos.links[0].uri;
         var fileName = `${date} ${playerName} ${runTimeFormatted}.mp4`;
 
-        var command = `youtube-dl -o '${fileName}' ${videoLink}`;
+        var command = `youtube-dl -o "${fileName}" ${videoLink}`;
 
         return command;
       });
