@@ -35,20 +35,26 @@
 
   <div id="navbarBasicExample" class="navbar-menu">
     <div class="navbar-start">
-      <a class="navbar-item" href="users.html">
+      <!-- <a class="navbar-item" href="users.html">
         Users
       </a>
       <a class="navbar-item" href="follows.html">
         Follows
-      </a>
+      </a> -->
       <a class="navbar-item" href="leaderboards.html">
         Leaderboards
       </a>
       <a class="navbar-item" href="runs.html">
         Speedruns
       </a>
-      <a class="navbar-item" href="stream.html">
+      <!-- <a class="navbar-item" href="stream.html">
         StreamInfo
+      </a> -->
+      <a class="navbar-item" href="news.html">
+        News
+      </a>
+      <a class="navbar-item" href="removetimestamps.html">
+        Remove Timestamps
       </a>
     </div>
   </div>
@@ -59,26 +65,26 @@
     <div class="container">
       <h1 class="title">Speedrun Things</h1>
       <dl>
-        <dt class="title is-4">
-          <a href="users.html">Users</a>
-        </dt>
-        <dd class="subtitle">Searches Twitch users by user name or user id. Returns the profile picture, user name, user id, and view count.</dd>
-        <dt class="title is-4">
-          <a href="follows.html">Follows</a>
-        </dt>
-        <dd class="subtitle">Given a Twitch user id, gets that user's follows, then displays which of those channels are live. Also generates links for MultiTwitch and chat popouts.</dd>
+
         <dt class="title is-4">
           <a href="leaderboards.html">Leaderboards</a>
         </dt>
-        <dd class="subtitle">Returns leaderboards by series on Speedrun.com.</dd>
+        <dd class="subtitle">Returns current leaderboards by series on Speedrun.com.</dd>
+
         <dt class="title is-4">
           <a href="runs.html">Speedruns</a>
         </dt>
         <dd class="subtitle">Returns <em>all</em> runs for a game, not just current leaderboards. Also displays World Record progression tables and charts.</dd>
+
         <dt class="title is-4">
-          <a href="stream.html">Stream Info</a>
+          <a href="news.html">News</a>
         </dt>
-        <dd class="subtitle">Search for a Twitch stream, returns the leaderboards for that game on Speedrun.com.</dd>
+        <dd class="subtitle">Aggregate of speedrun news. Current just the top posts on r/speedrun.com</dd>
+
+        <dt class="title is-4">
+          <a href="news.html">Remove Timestamps</a>
+        </dt>
+        <dd class="subtitle">Paste in a YouTube transcript. Get the text with timestamps and line returns removed.</dd>
 
       </dl>
     </div>

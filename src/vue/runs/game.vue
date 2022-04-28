@@ -1,5 +1,8 @@
 <template>
   <div>
+    <div class="container">
+      <h2 class="title">{{game.names.international}}</h2>
+    </div>
     <Category
       v-for="category in runs"
       v-bind:category="category"
@@ -14,6 +17,9 @@ export default {
   computed: {
     runs() {
       return this.$store.state.runs;
+    },
+    game() {
+      return this.$store.state.game;
     }
   },
   components: {

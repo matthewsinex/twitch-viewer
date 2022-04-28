@@ -22,7 +22,8 @@
                 <th>Date</th>
                 <th>Time</th>
                 <th>Status</th>
-                <th>Link</th>
+                <th></th>
+                <th></th>
               </tr>
             </thead>
             <tbody>

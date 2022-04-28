@@ -9,6 +9,7 @@ Vue.use(Vuex);
 export const store = new Vuex.Store({
   state: {
     game_search_results: [],
+    game: {},
     runs: []
   },
   mutations: {
@@ -20,6 +21,9 @@ export const store = new Vuex.Store({
     },
     SET_GAME_VARIABLES(state, value) {
       state.game_variables = value;
+    },
+    SET_GAME(state, value){
+      state.game = value;
     }
   },
   actions: {
@@ -66,18 +70,21 @@ export const store = new Vuex.Store({
         //group the runs by category
         const grouped = Utils.groupBy(runs, run => run.category.data.name);
         const groupedRuns = Array.from(grouped);
+        console.log(runs);
+        console.log(gameCategories);
+        console.log(groupedRuns);
 
         let categories =
-          groupedRuns.map(r => {
+          groupedRuns
+          .filter(r => gameCategories.find(x => {return x.name == r[0]}) != undefined) //some runs have categories that are not in the game?
+          .map(r => {
             return {
               category: r[0],
               categoryId: gameCategories.find(x => {return x.name == r[0]}).id,
               runs: Utils.sortRuns(r[1]),
               variables: []
             }
-          })
-
-        console.log(gameVariables);
+          });
 
         categories.forEach(c => {
           gameVariables.forEach(v => {

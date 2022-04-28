@@ -5,6 +5,7 @@
     <td style="text-align: right;">{{runTimeFormatted}}</td>
     <td>{{run.status.status}}</td>
     <td><a v-bind:href="run.weblink">Link</a></td>
+    <td><a href="#" v-on:click.prevent="generateBatchDownload">Download</a></td>
   </tr>
 </template>
 
@@ -25,6 +26,14 @@
         else {
           return this.run.players.data[0].name;
         }
+      }
+    },
+    methods: {
+      generateBatchDownload() {
+        var link = Utils.generateDownloadLink(this.run);
+        Utils.copyToClipboard(link);
+
+        alert('yt-dlp command copied to clipboard. Paste into a batch file or command prompt and run to download video.');
       }
     }
   }

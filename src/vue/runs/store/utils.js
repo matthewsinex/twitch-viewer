@@ -37,31 +37,35 @@ export default {
       return dateA - dateB;
     });
   },
+  generateDownloadLink(x) {
+    //run time
+    var runTimeFormatted = this.fancyTimeFormat(x.times.realtime_t);
+    runTimeFormatted = runTimeFormatted.replaceAll(':', '_');
+
+    //runner name
+    var playerName = "";
+    if(x.players.data[0].names){
+      playerName = x.players.data[0].names.international;
+    }
+    else {
+      playerName = x.players.data[0].name;
+    }
+
+    //
+    var date = x.date.replaceAll('-', '.');
+    var videoLink = x.videos.links[0].uri;
+    var fileName = `${date} ${playerName} ${runTimeFormatted}.mp4`;
+
+    var command = `yt-dlp -o "${fileName}" ${videoLink}`;
+
+    return command;
+  },
   generateBatchDownload(runs) {
     var self = this;
+
     var batchFileCommands = runs
       .map(function(x){
-        //run time
-        var runTimeFormatted = self.fancyTimeFormat(x.times.realtime_t);
-        runTimeFormatted = runTimeFormatted.replaceAll(':', '_');
-
-        //runner name
-        var playerName = "";
-        if(x.players.data[0].names){
-          playerName = x.players.data[0].names.international;
-        }
-        else {
-          playerName = x.players.data[0].name;
-        }
-
-        //
-        var date = x.date.replaceAll('-', '.');
-        var videoLink = x.videos.links[0].uri;
-        var fileName = `${date} ${playerName} ${runTimeFormatted}.mp4`;
-
-        var command = `youtube-dl -o "${fileName}" ${videoLink}`;
-
-        return command;
+        return self.generateDownloadLink(x);
       });
 
       this.copyToClipboard(
@@ -69,7 +73,7 @@ export default {
         .join('\r\n')
       );
 
-      alert('youtube-dl commands copied to clipboard. Paste into a batch file and run to download videos.');
+      alert('yt-dlp commands copied to clipboard. Paste into a batch file or command prompt and run to download videos.');
   },
   copyToClipboard(str) {
     var el = document.createElement('textarea');

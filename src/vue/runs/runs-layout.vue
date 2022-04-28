@@ -41,6 +41,13 @@ export default {
       game: ""
     }
   },
+  mounted(){
+      // let searchParams = new URLSearchParams(window.location.search);
+      // if(searchParams.has('gameid')) {
+      //   this.$store.dispatch("GET_RUNS", searchParams.get('gameid'));
+      // };
+      // this.$forceUpdate();
+  },
   methods: {
     handleButtonClick() {
       let game_name = this.game;
