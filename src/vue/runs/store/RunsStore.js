@@ -10,9 +10,13 @@ export const store = new Vuex.Store({
   state: {
     game_search_results: [],
     game: {},
-    runs: []
+    runs: [],
+    isLoading: false
   },
   mutations: {
+    SET_IS_LOADING(state, value){
+      state.isLoading = value;
+    },
     SET_GAME_SEARCH_RESULTS(state, value) {
       state.game_search_results = value;
     },
@@ -113,6 +117,7 @@ export const store = new Vuex.Store({
         })
 
         context.commit("SET_RUNS", categories);
+        context.commit("SET_IS_LOADING", false);
       })
     },
     UPDATE_GAME_VARIABLES(context, payload) {

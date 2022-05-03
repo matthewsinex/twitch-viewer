@@ -14,6 +14,7 @@ export default {
   methods: {
     handleClick() {
       this.$store.commit("SET_GAME", this.game);
+      this.$store.commit("SET_IS_LOADING", true);
       this.$store.dispatch("GET_RUNS", this.game.id);
     }
   }

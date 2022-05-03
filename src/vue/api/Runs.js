@@ -50,7 +50,7 @@ export default {
   },
   runPromise(game_id) {
     return new Promise((resolve, reject) => {
-      this.getRuns(`https://www.speedrun.com/api/v1/runs?game=${game_id}&embed=players,category`, [], resolve, reject)
+      this.getRuns(`https://www.speedrun.com/api/v1/runs?game=${game_id}&embed=players,category&max=195`, [], resolve, reject)
     })
   },
   getRuns(url, runs, resolve, reject){

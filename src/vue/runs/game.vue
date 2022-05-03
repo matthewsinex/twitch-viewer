@@ -3,6 +3,11 @@
     <div class="container">
       <h2 class="title">{{game.names.international}}</h2>
     </div>
+    <div class="container" v-if="$store.state.isLoading">
+      <p>
+        Loading...
+      </p>
+    </div>
     <Category
       v-for="category in runs"
       v-bind:category="category"
