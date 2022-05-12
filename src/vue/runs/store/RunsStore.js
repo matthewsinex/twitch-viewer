@@ -51,6 +51,10 @@ export const store = new Vuex.Store({
         let gameCategories = values[0].data.categories.data;
         let runs = values[1];
 
+        // runs = runs.map(x => {
+        //   return Utils.convertRunToRunView(context.state.game, x);
+        // })
+
         //set game variables
         //set selectedValue to default variable
 
@@ -72,23 +76,25 @@ export const store = new Vuex.Store({
         })
 
         //group the runs by category
-        const grouped = Utils.groupBy(runs, run => run.category.data.name);
+        const grouped = Utils.groupBy(runs, run => run.category.data.id);
         const groupedRuns = Array.from(grouped);
-        console.log(runs);
-        console.log(gameCategories);
-        console.log(groupedRuns);
+        // console.log(runs);
+        // console.log(gameCategories);
+         console.log(groupedRuns);
 
         let categories =
           groupedRuns
-          .filter(r => gameCategories.find(x => {return x.name == r[0]}) != undefined) //some runs have categories that are not in the game?
+          //.filter(r => gameCategories.find(x => {return x.name == r[0]}) != undefined) //some runs have categories that are not in the game?
           .map(r => {
             return {
-              category: r[0],
-              categoryId: gameCategories.find(x => {return x.name == r[0]}).id,
+              category: gameCategories.find(x => {return x.id == r[0]}).name,
+              categoryId: gameCategories.find(x => {return x.id == r[0]}).id,
               runs: Utils.sortRuns(r[1]),
               variables: []
             }
           });
+
+        console.log(categories);
 
         categories.forEach(c => {
           gameVariables.forEach(v => {

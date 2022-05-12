@@ -20,7 +20,11 @@
               <tr>
                 <th>Name</th>
                 <th>Date</th>
-                <th>Time</th>
+                <th
+                  v-for="gameTime in runtimes" :key="gameTime"
+                >
+                  {{gameTime}}
+                </th>
                 <th>Status</th>
                 <th></th>
                 <th></th>
@@ -111,6 +115,9 @@ export default{
 
         return filteredRuns;
       }
+    },
+    runtimes() {
+      return this.$store.state.game.ruleset["run-times"];
     },
     selectedVariables() {
       let categoryVariables = this.category.variables;

@@ -10,17 +10,23 @@
         <tr>
           <th>Name</th>
           <th>Date</th>
-          <th>Time</th>
+          <th
+            v-for="gameTime in runtimes" :key="gameTime"
+          >
+            {{gameTime}}
+          </th>
+          <th>Status</th>
           <th>Link</th>
+          <th></th>
         </tr>
       </thead>
       <tbody>
-        <WorldRecordRunRow
+        <RunRow
           v-for="run in worldRecordRuns"
           v-bind:key="run.id"
           v-bind:run="run"
         >
-      </WorldRecordRunRow>
+      </RunRow>
       </tbody>
     </table>
     <WorldRecordChart
@@ -38,6 +44,7 @@
 </template>
 <script>
 import WorldRecordRunRow from './world-record-run-row.vue'
+import RunRow from './run-row.vue'
 import WorldRecordChart from './world-record-chart.vue'
 import Utils from './store/utils.js'
 
@@ -50,7 +57,7 @@ export default {
   computed: {
     worldRecordRuns() {
       let verifiedRuns =
-        this.runs.filter(r => r.status.status == "verified");
+        this.runs.filter(r => r.status.status == "verified" && r.date != null);
 
       verifiedRuns.sort((a,b) => {
         var dateA = new Date(a.date);
@@ -63,15 +70,19 @@ export default {
       worldRecords.push(verifiedRuns[0]);
       verifiedRuns.forEach(x => {
         var lastEl = worldRecords[worldRecords.length - 1];
-        if(x.times.realtime_t < lastEl.times.realtime_t) {
+        if(x.times.primary_t < lastEl.times.primary_t) {
           worldRecords.push(x);
         }
       })
       return worldRecords;
-    }
+    },
+    runtimes() {
+      return this.$store.state.game.ruleset["run-times"];
+    },
   },
   components: {
     WorldRecordRunRow,
+    RunRow,
     WorldRecordChart
   },
   methods: {

@@ -25,7 +25,8 @@
     "lambda-build": "netlify-lambda build functions",
     "build": "SET NODE_ENV=production& webpack& npm run lambda-build",
     "dev:webpack": "SET NODE_ENV=development& webpack",
-    "dev": "SET NODE_ENV=development& SET API_BASE_URL=http://localhost:9000/.netlify/functions& webpack& concurrently \"webpack-dev-server --content-base public/\" \"npm run lambda-serve\""
+    "dev-old": "SET NODE_ENV=development& SET API_BASE_URL=http://localhost:9000/.netlify/functions& webpack& concurrently \"webpack-dev-server --content-base public/\" \"npm run lambda-serve\"",
+    "dev": "SET NODE_ENV=development& webpack& concurrently \"webpack-dev-server --content-base public/\""
   },
   "author": "",
   "license": "ISC"
