@@ -34,6 +34,7 @@
 
 import GameSearchResults from './game-search-results.vue'
 import Game from './game.vue'
+import GamesApi from '../api/Games.js'
 
 export default {
   data() {
@@ -42,11 +43,17 @@ export default {
     }
   },
   mounted(){
-      // let searchParams = new URLSearchParams(window.location.search);
-      // if(searchParams.has('gameid')) {
-      //   this.$store.dispatch("GET_RUNS", searchParams.get('gameid'));
-      // };
-      // this.$forceUpdate();
+      let searchParams = new URLSearchParams(window.location.search);
+      if(searchParams.has('gameid')) {
+        let gameId = searchParams.get('gameid');
+        GamesApi.getById(gameId)
+          .then((result) => {
+            let game = result.data;
+            this.$store.commit("SET_GAME", game);
+            this.$store.commit("SET_IS_LOADING", true);
+            this.$store.dispatch("GET_RUNS", game.id);
+          })
+      };
   },
   methods: {
     handleButtonClick() {
